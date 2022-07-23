@@ -20,6 +20,7 @@ require('packer').startup(function(use)
   use 'nvim-treesitter/nvim-treesitter'                                           -- Highlight, edit, and navigate code
   use 'nvim-treesitter/nvim-treesitter-textobjects'                               -- Additional textobjects for treesitter
   use 'neovim/nvim-lspconfig'                                                     -- Collection of configurations for built-in LSP client
+  use { 'neoclide/coc.nvim', branch = 'release' }
   use 'williamboman/nvim-lsp-installer'                                           -- Automatically install language servers to stdpath
   use { 'hrsh7th/nvim-cmp', requires = { 'hrsh7th/cmp-nvim-lsp' } }               -- Autocompletion
   use { 'L3MON4D3/LuaSnip', requires = { 'saadparwaiz1/cmp_luasnip' } }           -- Snippet Engine and Snippet Expansion
@@ -28,7 +29,6 @@ require('packer').startup(function(use)
   use 'lukas-reineke/indent-blankline.nvim'                                       -- Add indentation guides even on blank lines
   use 'tpope/vim-sleuth'                                                          -- Detect tabstop and shiftwidth automatically
   use { 'nvim-telescope/telescope.nvim', requires = { 'nvim-lua/plenary.nvim' } } -- Fuzzy Finder (files, lsp, etc)
-
   -- Fuzzy Finder Algorithm which requires local dependencies to be built. Only load if `make` is available
   use { 'nvim-telescope/telescope-fzf-native.nvim', run = 'make', cond = vim.fn.executable "make" == 1 }
 
@@ -42,6 +42,7 @@ end)
 -- make sense to execute the rest of the init.lua.
 --
 -- You'll need to restart nvim, and then it will work.
+
 if is_bootstrap then
   print '=================================='
   print '    Plugins are being installed'
@@ -119,6 +120,9 @@ vim.cmd([[noremap! <D-BS> <C-w>]])
 
 -- Undo with Command Z
 vim.keymap.set('i', '<D-z>', '<c-u>', { silent = true })
+
+-- Exit terminal with Esc
+vim.cmd([[:tnoremap <Esc> <C-\><C-n>]])
 
 -- jj to Esc
 vim.keymap.set('i', 'jj', '<Esc>', { silent = true })
