@@ -7,6 +7,13 @@ if vim.fn.empty(vim.fn.glob(install_path)) > 0 then
   vim.cmd [[packadd packer.nvim]]
 end
 
+if vim.g.neovide then
+  vim.g.neovide_input_use_logo=true
+end
+
+
+
+
 -- stylua: ignore start
 require('packer').startup(function(use)
   use 'wbthomason/packer.nvim'                                                    -- Package manager
@@ -60,7 +67,7 @@ vim.api.nvim_create_autocmd('BufWritePost', {
 -- See `:help vim.o`
 
 -- Set highlight on search
-vim.o.hlsearch = false
+vim.o.hlsearch = true
 
 -- Make line numbers default
 vim.wo.number = true
@@ -89,6 +96,10 @@ vim.cmd [[colorscheme onedark]]
 -- Set completeopt to have a better completion experience
 vim.o.completeopt = 'menuone,noselect'
 
+-- Default backspace behavior
+vim.opt.backspace = 'indent,eol,start'
+
+
 -- [[ Basic Keymaps ]]
 -- Set <space> as the leader key
 -- See `:help mapleader`
@@ -97,6 +108,19 @@ vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
 
 -- Keymaps for better default experience
+-- Default Copy Paste behavior
+vim.cmd([[
+nmap <D-c> "+y
+vmap <D-c> "+y
+vmap <D-v> "+p
+inoremap <D-v> <c-r>+
+cnoremap <D-v> <c-r>+
+inoremap <c-r> <D-v>+
+]])
+
+-- jj to Esc
+vim.keymap.set('i', 'jj', '<Esc>', { silent = true })
+
 -- See `:help vim.keymap.set()`
 vim.keymap.set({ 'n', 'v' }, '<Space>', '<Nop>', { silent = true })
 
