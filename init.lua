@@ -42,7 +42,7 @@ require('packer').startup(function(use)
           "MunifTanjim/nui.nvim",
         }
     }
-
+  use 'ggandor/lightspeed.nvim'
   if is_bootstrap then
     require('packer').sync()
   end
