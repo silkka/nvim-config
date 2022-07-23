@@ -119,6 +119,8 @@ inoremap <c-r> <D-v>+
 -- Delete word with command backspace
 vim.cmd([[noremap! <D-BS> <C-w>]])
 
+-- Undo with Command Z
+vim.keymap.set('i', '<D-z>', '<c-u>', { silent = true })
 
 -- jj to Esc
 vim.keymap.set('i', 'jj', '<Esc>', { silent = true })
