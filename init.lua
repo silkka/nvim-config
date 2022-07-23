@@ -122,7 +122,7 @@ vim.cmd([[noremap! <D-BS> <C-w>]])
 vim.keymap.set('i', '<D-z>', '<c-u>', { silent = true })
 
 -- Exit terminal with Esc
-vim.cmd([[:tnoremap <Esc> <C-\><C-n>]])
+vim.cmd([[:tnoremap § <C-\><C-n>]])
 
 -- jj to Esc
 vim.keymap.set('i', 'jj', '<Esc>', { silent = true })
