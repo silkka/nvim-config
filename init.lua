@@ -33,6 +33,15 @@ require('packer').startup(function(use)
   use { 'nvim-telescope/telescope.nvim', requires = { 'nvim-lua/plenary.nvim' } } -- Fuzzy Finder (files, lsp, etc)
   -- Fuzzy Finder Algorithm which requires local dependencies to be built. Only load if `make` is available
   use { 'nvim-telescope/telescope-fzf-native.nvim', run = 'make', cond = vim.fn.executable "make" == 1 }
+  use {
+      "nvim-neo-tree/neo-tree.nvim",
+        branch = "v2.x",
+        requires = {
+          "nvim-lua/plenary.nvim",
+          "kyazdani42/nvim-web-devicons", -- not strictly required, but recommended
+          "MunifTanjim/nui.nvim",
+        }
+    }
 
   if is_bootstrap then
     require('packer').sync()
@@ -138,7 +147,11 @@ vim.keymap.set('n', 'k', "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = tr
 vim.keymap.set('n', 'j', "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
 
 -- [[ Plugin mappings ]]
+-- LazyGit
 vim.cmd([[nnoremap <silent> <leader>gg :LazyGit<CR>]])
+-- Neotree
+vim.g.neo_tree_remove_legacy_commands = 1
+vim.keymap.set('n', '<leader>e', ":Neotree position=left toggle=true reveal=true<CR>", { silent = true })
 
 -- Toggleable terminals
 require("toggleterm").setup{
@@ -293,7 +306,6 @@ require('nvim-treesitter.configs').setup {
 -- Diagnostic keymaps
 vim.keymap.set('n', '[d', vim.diagnostic.goto_prev)
 vim.keymap.set('n', ']d', vim.diagnostic.goto_next)
-vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float)
 vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist)
 
 -- LSP settings.
