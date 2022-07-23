@@ -9,10 +9,8 @@ end
 
 if vim.g.neovide then
   vim.g.neovide_input_use_logo=true
+  vim.g.neovide_refresh_rate=165
 end
-
-
-
 
 -- stylua: ignore start
 require('packer').startup(function(use)
@@ -107,9 +105,9 @@ vim.opt.backspace = 'indent,eol,start'
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
 
--- Keymaps for better default experience
 -- Default Copy Paste behavior
 vim.cmd([[
+set clipboard=unnamedplus
 nmap <D-c> "+y
 vmap <D-c> "+y
 vmap <D-v> "+p
@@ -117,6 +115,10 @@ inoremap <D-v> <c-r>+
 cnoremap <D-v> <c-r>+
 inoremap <c-r> <D-v>+
 ]])
+
+-- Delete word with command backspace
+vim.cmd([[noremap! <D-BS> <C-w>]])
+
 
 -- jj to Esc
 vim.keymap.set('i', 'jj', '<Esc>', { silent = true })
