@@ -108,6 +108,9 @@ vim.o.completeopt = 'menuone,noselect'
 -- Default backspace behavior
 vim.opt.backspace = 'indent,eol,start'
 
+-- set hidden for toggleterminal / COC
+vim.o.hidden = true
+
 
 -- [[ Basic Keymaps ]]
 -- Set <space> as the leader key
@@ -175,6 +178,55 @@ vim.o.foldlevelstart = -1
 vim.o.foldenable = true
 require('ufo').setup()
 
+-- COC.vim settigns
+vim.o.cmdheight = 2
+vim.o.updatetime = 300
+vim.o.signcolumn = 'number'
+vim.keymap.set('i', '<c-space>', 'coc#refresh()', { noremap = true, silent = true, expr = true })
+
+vim.cmd([[
+" GoTo code navigation.
+nmap <silent> gd <Plug>(coc-definition)
+nmap <silent> gy <Plug>(coc-type-definition)
+nmap <silent> gi <Plug>(coc-implementation)
+nmap <silent> gr <Plug>(coc-references)
+nnoremap <silent> K :call ShowDocumentation()<CR>
+
+" Use K to show documentation in preview window.
+function! ShowDocumentation()
+  if CocAction('hasProvider', 'hover')
+    call CocActionAsync('doHover')
+  else
+    call feedkeys('K', 'in')
+  endif
+endfunction
+
+" Highlight the symbol and its references when holding the cursor.
+autocmd CursorHold * silent call CocActionAsync('highlight')
+
+" Symbol renaming.
+nmap <leader>rn <Plug>(coc-rename)
+
+" Formatting selected code.
+xmap <leader>f  <Plug>(coc-format-selected)
+nmap <leader>f  <Plug>(coc-format-selected)
+
+" Do default action for next item.
+nnoremap <silent><nowait> <leader>j  :<C-u>CocNext<CR>
+" Do default action for previous item.
+nnoremap <silent><nowait> <leader>k  :<C-u>CocPrev<CR>
+
+" Show commands.
+nnoremap <silent><nowait> <D-å> :<C-u>CocList commands<cr>
+
+" Applying codeAction to the selected region.
+" Example: `<leader>aap` for current paragraph
+xmap <leader>a  <Plug>(coc-codeaction-selected)
+nmap <leader>a  <Plug>(coc-codeaction-selected)
+
+" Run the Code Lens action on the current line.
+nmap <leader>cl  <Plug>(coc-codelens-action)
+]])
 -- [[ Highlight on yank ]]
 -- See `:help vim.highlight.on_yank()`
 local highlight_group = vim.api.nvim_create_augroup('YankHighlight', { clear = true })
