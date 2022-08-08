@@ -127,6 +127,7 @@ set clipboard=unnamedplus
 nmap <D-c> "+y
 vmap <D-c> "+y
 vmap <D-v> "+p
+tmap <D-v> §"+pa
 inoremap <D-v> <c-r>+
 cnoremap <D-v> <c-r>+
 inoremap <c-r> <D-v>+
